@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
 from tensorflow.keras.models import load_model
+from tensorflow.keras.models import save_model
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -9,6 +10,7 @@ CORS(app)  # Enable CORS for all routes
 
 # Load the LSTM model
 model = load_model('lstm.h5')
+save_model(model, 'lstm_retrained.h5')
 
 @app.route("/predict", methods=["POST"])
 def predict():
