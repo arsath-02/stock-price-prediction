@@ -89,10 +89,10 @@ function App() {
         
         {/* Displaying the 8 images */}
         <div className="grid grid-cols-2 gap-4 mt-6">
-          <img src={img5} alt="img1" className="w-full h-auto" />
-          <img src={img6} alt="img2" className="w-full h-auto" />
-          <img src={img7} alt="img3" className="w-full h-auto" />
-          <img src={img8} alt="img4" className="w-full h-auto" />
+          <img src={img1} alt="img1" className="w-full h-auto" />
+          <img src={img2} alt="img2" className="w-full h-auto" />
+          <img src={img3} alt="img3" className="w-full h-auto" />
+          <img src={img4} alt="img4" className="w-full h-auto" />
           <img src={img5} alt="img5" className="w-full h-auto" />
           <img src={img6} alt="img6" className="w-full h-auto" />
           <img src={img7} alt="img7" className="w-full h-auto" />
