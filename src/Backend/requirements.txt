@@ -1,6 +1,4 @@
-fastapi
-uvicorn
-tensorflow
-pydantic
-numpy
-ngrok
+Flask==2.3.2
+flask-cors==3.0.10
+numpy==1.24.3
+tensorflow==2.13.0
