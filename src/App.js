@@ -25,7 +25,7 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://apparent-wolf-obviously.ngrok-free.app/predict', {
+      const response = await axios.post('https://stock-price-prediction-nr78.onrender.com/predict', {
         input: prices.map(price => parseFloat(price))
       });
 
