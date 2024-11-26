@@ -1,4 +1,6 @@
 Flask
-flask-cors
-tensorflow
+Flask-CORS
 numpy
+tensorflow
+scikit-learn
+keras-tuner
