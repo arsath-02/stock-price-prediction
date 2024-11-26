@@ -16,3 +16,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.money-loader {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #54a854, #4ade80);
+  position: relative;
+  animation: spin 1s infinite linear;
+}
+
+.money-loader::before {
+  content: "$";
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
