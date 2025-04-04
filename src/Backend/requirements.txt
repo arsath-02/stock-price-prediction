@@ -3,4 +3,4 @@ Flask-CORS
 numpy
 tensorflow
 scikit-learn
-keras-tuner
+keras_tuner
