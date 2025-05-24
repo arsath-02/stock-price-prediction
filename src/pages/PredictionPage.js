@@ -22,7 +22,7 @@ function PredictionPage() {
     setError(null);
 
     try {
-      const response = await axios.post("https://stock-price-prediction-nr78.onrender.com/predict", {
+      const response = await axios.post("https://apparent-wolf-obviously.ngrok-free.app/predict", {
         input: prices.map((price) => parseFloat(price)),
       });
       setPrediction(response.data.prediction[0][0]);
