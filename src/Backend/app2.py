@@ -8,6 +8,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import keras_tuner as kt
 import os
+import ngrok
+import uvicorn
 
 
 app = Flask(__name__)
@@ -76,6 +78,8 @@ else:
     model = create_and_train_model(X_train, y_train, X_test, y_test)
     model.save('lstm_retrained.h5') 
 
+ngrok.set_auth_token("2a1iGE4Q5SDAF4mhdAVXeNptwJd_2GBcW2ACMaj2JoAJy8Gtt")
+listener = ngrok.forward("127.0.0.1:5000", authtoken_from_env=True, domain="apparent-wolf-obviously.ngrok-free.app")
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -106,4 +110,6 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    public_url = ngrok.connect(5000)
+    print(f"Public URL: {public_url}")
+    uvicorn.run(app, host="0.0.0.0", port=5000)
