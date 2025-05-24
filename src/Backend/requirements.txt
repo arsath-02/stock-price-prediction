@@ -1,0 +1,8 @@
+Flask
+Flask-CORS
+numpy
+tensorflow
+scikit-learn
+keras_tuner
+ngrok
+flask_cors
