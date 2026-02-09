@@ -25,7 +25,7 @@ ngrok.set_auth_token("2a1iGE4Q5SDAF4mhdAVXeNptwJd_2GBcW2ACMaj2JoAJy8Gtt")
 listener = ngrok.forward("127.0.0.1:5000", authtoken_from_env=True, domain="apparent-wolf-obviously.ngrok-free.app")
 
 @app.post("/predict")
-def predict(request: PredictRequest):
+def predict():
     input_list = request.input
     print("Received input data:", input_list)
 

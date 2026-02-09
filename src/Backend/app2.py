@@ -11,9 +11,11 @@ import os
 import ngrok
 import uvicorn
 
-
 app = Flask(__name__)
-CORS(app)  
+CORS(app)  # Enable CORS for all routes
+
+ngrok.set_auth_token("2a1iGE4Q5SDAF4mhdAVXeNptwJd_2GBcW2ACMaj2JoAJy8Gtt")
+listener = ngrok.forward("127.0.0.1:5000", authtoken_from_env=True, domain="apparent-wolf-obviously.ngrok-free.app")
 
 
 def build_model(hp):
@@ -108,8 +110,10 @@ def predict():
         print("Error during prediction:", str(e))
         return jsonify({"error": str(e)}), 500
 
-
 if __name__ == "__main__":
+    public_url = ngrok.connect(5000)
+    print(f"Public URL: {public_url}")
+    app.run(host="0.0.0.0", port=5000)
     public_url = ngrok.connect(5000)
     print(f"Public URL: {public_url}")
     app.run(host="0.0.0.0", port=5000)

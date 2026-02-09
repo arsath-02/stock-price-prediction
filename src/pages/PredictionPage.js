@@ -22,7 +22,11 @@ function PredictionPage() {
     setError(null);
 
     try {
+<<<<<<< HEAD
       const response = await axios.post("https://apparent-wolf-obviously.ngrok-free.app/predict", {
+=======
+      const response = await axios.post("http://127.0.0.1:5000/predict", {
+>>>>>>> f1837b1 (updated code)
         input: prices.map((price) => parseFloat(price)),
       });
       setPrediction(response.data.prediction[0][0]);
