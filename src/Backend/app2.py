@@ -12,63 +12,10 @@ import ngrok
 import uvicorn
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)  
 
 ngrok.set_auth_token("2a1iGE4Q5SDAF4mhdAVXeNptwJd_2GBcW2ACMaj2JoAJy8Gtt")
 listener = ngrok.forward("127.0.0.1:5000", authtoken_from_env=True, domain="apparent-wolf-obviously.ngrok-free.app")
-
-
-def build_model(hp):
-    model = Sequential()
-    
-  
-    model.add(LSTM(units=hp.Int('units', min_value=32, max_value=256, step=32),
-                   activation='relu',
-                   input_shape=(None, 1),
-                   return_sequences=True))
-    model.add(Dropout(0.2))
-    
-    model.add(LSTM(units=hp.Int('units', min_value=32, max_value=256, step=32),
-                   activation='relu',
-                   return_sequences=False))
-    model.add(Dropout(0.2))
-    
-
-    model.add(Dense(1, activation='sigmoid'))  
-    
-
-    model.compile(optimizer=Adam(learning_rate=hp.Float('learning_rate', min_value=1e-5, max_value=1e-2, sampling='log')),
-                  loss='binary_crossentropy', 
-                  metrics=['accuracy'])
-    
-    return model
-
-def create_and_train_model(X_train, y_train, X_test, y_test):
-    tuner = kt.Hyperband(
-        build_model,
-        objective='val_accuracy',
-        max_epochs=10,
-        factor=3,
-        directory='my_dir',
-        project_name='stock_prediction'
-    )
-
-
-    tuner.search(X_train, y_train, epochs=10, validation_data=(X_test, y_test))
-
-
-    best_model = tuner.get_best_models(num_models=1)[0]
-    return best_model
-
-
-data = np.random.rand(100, 10)
-labels = np.random.randint(2, size=100)
-
-
-scaler = StandardScaler()
-data = scaler.fit_transform(data)
-
-X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
 
 
 model = None
@@ -79,9 +26,6 @@ else:
 
     model = create_and_train_model(X_train, y_train, X_test, y_test)
     model.save('lstm_retrained.h5') 
-
-ngrok.set_auth_token("2a1iGE4Q5SDAF4mhdAVXeNptwJd_2GBcW2ACMaj2JoAJy8Gtt")
-listener = ngrok.forward("127.0.0.1:5000", authtoken_from_env=True, domain="apparent-wolf-obviously.ngrok-free.app")
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -111,9 +55,6 @@ def predict():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    public_url = ngrok.connect(5000)
-    print(f"Public URL: {public_url}")
-    app.run(host="0.0.0.0", port=5000)
     public_url = ngrok.connect(5000)
     print(f"Public URL: {public_url}")
     app.run(host="0.0.0.0", port=5000)
